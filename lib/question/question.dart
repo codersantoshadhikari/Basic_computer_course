@@ -1,13 +1,16 @@
+// ignore_for_file: library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
+
+
+
 
 class QuestionPage extends StatefulWidget {
   final String topic;
 
-  const QuestionPage({super.key, required this.topic});
+  const QuestionPage({Key? key, required this.topic}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _QuestionPageState createState() => _QuestionPageState();
 }
 
@@ -26,7 +29,6 @@ class _QuestionPageState extends State<QuestionPage> {
     // Add more questions here
   ];
 
-
   int currentQuestionIndex = 0;
   int score = 0;
 
@@ -41,7 +43,13 @@ class _QuestionPageState extends State<QuestionPage> {
         currentQuestionIndex++;
       });
     } else {
-      // Navigate to results page or handle end of questions
+      // All questions answered, navigate to the results page
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => ResultsPage(score: score, totalQuestions: questions.length),
+        ),
+      );
     }
   }
 
@@ -49,30 +57,47 @@ class _QuestionPageState extends State<QuestionPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${widget.topic} Questions'),
+        title: Text('${widget.topic} Quiz'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text('Question ${currentQuestionIndex + 1}/${questions.length}'),
-          const SizedBox(height: 10),
-          Text(questions[currentQuestionIndex].questionText),
-          const SizedBox(height: 20),
-          Column(
-            children: List.generate(
-              questions[currentQuestionIndex].options.length,
-              (index) => Padding(
-                padding: const EdgeInsets.symmetric(vertical: 5),
-                child: ElevatedButton(
-                  onPressed: () => answerSelected(index),
-                  child: Text(questions[currentQuestionIndex].options[index]),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text('Question ${currentQuestionIndex + 1}/${questions.length}', style: const TextStyle(fontSize: 20)),
+              const SizedBox(height: 20),
+              Text(
+                questions[currentQuestionIndex].questionText,
+                style: const TextStyle(fontSize: 24),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 20),
+              Column(
+                children: List.generate(
+                  questions[currentQuestionIndex].options.length,
+                  (index) => Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: ElevatedButton(
+                      onPressed: () => answerSelected(index),
+                      style: ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.all(20),
+                        minimumSize: const Size(200, 50),
+                      ),
+                      child: Text(
+                        questions[currentQuestionIndex].options[index],
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                    ),
+                  ),
                 ),
               ),
-            ),
+              const SizedBox(height: 20),
+              Text('Score: $score/${questions.length}', style: const TextStyle(fontSize: 20)),
+            ],
           ),
-          const SizedBox(height: 10),
-          Text('Score: $score/${questions.length}'),
-        ],
+        ),
       ),
     );
   }
@@ -84,4 +109,38 @@ class Question {
   final int correctAnswerIndex;
 
   Question(this.questionText, this.options, this.correctAnswerIndex);
+}
+
+class ResultsPage extends StatelessWidget {
+  final int score;
+  final int totalQuestions;
+
+  const ResultsPage({super.key, required this.score, required this.totalQuestions});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Quiz Results'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text('Quiz Complete!', style: TextStyle(fontSize: 24)),
+            const SizedBox(height: 20),
+            Text('Your Score: $score/$totalQuestions', style: const TextStyle(fontSize: 20)),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                // Navigate back to the quiz page to start again
+                Navigator.pop(context);
+              },
+              child: const Text('Restart Quiz'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

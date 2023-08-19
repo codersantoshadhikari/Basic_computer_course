@@ -24,7 +24,7 @@ class ComputerHomePage extends StatelessWidget {
         elevation: 0,
         actions: [
           IconButton(
-            icon: Icon(Icons.exit_to_app),
+            icon: const Icon(Icons.exit_to_app),
             onPressed: () {
               // Call a logout function or navigate to a login page here
               _logout(context);
@@ -111,9 +111,7 @@ class ComputerHomePage extends StatelessWidget {
   }
 
   void _logout(BuildContext context) {
-    // Implement your logout logic here, such as clearing session data
-    // and navigating to the login page
-    // For now, let's just close the app
+    
     Navigator.of(context).pop();
   }
 }

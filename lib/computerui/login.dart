@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:bloc_computer_app/computerui/computerpage.dart';
 import 'package:flutter/material.dart';
 
@@ -127,7 +129,7 @@ class _LoginFormState extends State<LoginForm> {
                   style: const TextStyle(fontSize: 16, color: kTextColor),
                   decoration: kInputDecoration.copyWith(
                     labelText: 'Email',
-                    labelStyle: TextStyle(color: kTextColor),
+                    labelStyle: const TextStyle(color: kTextColor),
                   ),
                 ),
                 const SizedBox(height: 16),
@@ -136,7 +138,7 @@ class _LoginFormState extends State<LoginForm> {
                   style: const TextStyle(fontSize: 16, color: kTextColor),
                   decoration: kInputDecoration.copyWith(
                     labelText: 'Password',
-                    labelStyle: TextStyle(color: kTextColor),
+                    labelStyle: const TextStyle(color: kTextColor),
                     suffixIcon: IconButton(
                       onPressed: () {
                         setState(() {
@@ -155,8 +157,8 @@ class _LoginFormState extends State<LoginForm> {
                 ElevatedButton(
                   onPressed: _login,
                   style: ElevatedButton.styleFrom(
-                    primary: kPrimaryColor,
-                    onPrimary: Colors.white,
+                    // primary: kPrimaryColor,
+                    // onPrimary: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
