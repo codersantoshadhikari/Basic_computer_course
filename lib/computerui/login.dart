@@ -219,43 +219,109 @@ class _LoginFormState extends State<LoginForm> {
     );
   }
 
-  void _showForgotPasswordDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Forgot Password'),
-          content: const Text('Implement your forgot password logic here.'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('OK'),
-            ),
-          ],
-        );
-      },
-    );
-  }
 
-  void _showCreateAccountDialog() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: const Text('Create Account'),
-          content: const Text('Implement your create account logic here.'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: const Text('OK'),
+
+void _showForgotPasswordDialog() {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      // Create a form to gather user input.
+      return AlertDialog(
+        title: const Text('Forgot Password'),
+        content: const Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            // Input field for Phone Number
+            TextField(
+              decoration: InputDecoration(labelText: 'Phone Number'),
+            ),
+            // Input field for Old Password
+            TextField(
+              obscureText: true, // Hide password text
+              decoration: InputDecoration(labelText: 'Old Password'),
             ),
           ],
-        );
-      },
-    );
-  }
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+         
+              Navigator.of(context).pop();
+            },
+            child: const Text('Submit'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); 
+            },
+            child: const Text('Cancel'),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+
+
+
+void _showCreateAccountDialog() {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      // Create a form to gather user input.
+      return AlertDialog(
+        title: const Text('Create Account'),
+        content: const Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            // Input field for First Name
+            TextField(
+              decoration: InputDecoration(labelText: 'First Name'),
+            ),
+            // Input field for Last Name
+            TextField(
+              decoration: InputDecoration(labelText: 'Last Name'),
+            ),
+            // Input field for Address
+            TextField(
+              decoration: InputDecoration(labelText: 'Address'),
+            ),
+            // Input field for Phone Number
+            TextField(
+              decoration: InputDecoration(labelText: 'Phone Number'),
+            ),
+            // Input field for Password
+            TextField(
+              obscureText: true, // Hide password text
+              decoration: InputDecoration(labelText: 'Password'),
+            ),
+            // Input field for Re-enter Password
+            TextField(
+              obscureText: true, // Hide password text
+              decoration: InputDecoration(labelText: 'Re-enter Password'),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              // Implement your account creation logic here
+              // You can access the input values using the TextEditingController for each field.
+              // For simplicity, we are just closing the dialog in this example.
+              Navigator.of(context).pop();
+            },
+            child: const Text('Create Account'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // Cancel the account creation.
+            },
+            child: const Text('Cancel'),
+          ),
+        ],
+      );
+    },
+  );
+}
 }
