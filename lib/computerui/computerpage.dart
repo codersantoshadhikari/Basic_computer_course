@@ -1,10 +1,6 @@
 import 'package:bloc_computer_app/question/question.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MaterialApp(home: ComputerHomePage()));
-}
-
 class ComputerHomePage extends StatelessWidget {
   const ComputerHomePage({Key? key}) : super(key: key);
 
@@ -12,25 +8,18 @@ class ComputerHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Computer Knowledge App',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 24.0,
-            fontWeight: FontWeight.bold,
+        title: const Center(
+          child: Text(
+            'Computer Knowledge App',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24.0,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         backgroundColor: Colors.blue,
         elevation: 0,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.exit_to_app),
-            onPressed: () {
-              // Call a logout function or navigate to a login page here
-              _logout(context);
-            },
-          ),
-        ],
       ),
       body: Container(
         color: Colors.grey[200],
@@ -57,8 +46,8 @@ class ComputerHomePage extends StatelessWidget {
                   ),
                   buildTopicCard(
                     topic: 'Programming Languages',
-                    onTap: () =>
-                        _navigateToQuestionPage(context, 'Programming Languages'),
+                    onTap: () => _navigateToQuestionPage(
+                        context, 'Programming Languages'),
                   ),
                   buildTopicCard(
                     topic: 'Python Languages',
@@ -111,7 +100,6 @@ class ComputerHomePage extends StatelessWidget {
   }
 
   void _logout(BuildContext context) {
-    
     Navigator.of(context).pop();
   }
 }

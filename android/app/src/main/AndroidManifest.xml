@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="bloc_computer_app"
+        android:label="Computer Knowledge App"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
